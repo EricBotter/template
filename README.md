@@ -33,3 +33,14 @@ servlet6
 -------
 
 A servlet container (jetty) project compatible with java6 and mvn2
+
+scalaServlet
+-------
+
+A servlet container (jetty) project for Scala.
+
+To start up server:
+
+	cd scalaServlet
+	sbt
+	~jetty:start
