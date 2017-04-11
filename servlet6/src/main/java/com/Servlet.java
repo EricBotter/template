@@ -1,16 +1,61 @@
 package com;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
+import org.sqlite.javax.SQLiteConnectionPoolDataSource;
+
+import com.zaxxer.hikari.HikariDataSource;
 
 public class Servlet extends HttpServlet {
 
+	
+//	private SQLiteConnectionPoolDataSource _ds;
+//	_ds = new SQLiteConnectionPoolDataSource();
+//	_ds.setUrl("jdbc:sqlite:/home/manlio/Linguaggi/template/servlet6/src/main/db/test.db");
+	
+//	private HikariDataSource _ds;
+//  _ds = new HikariDataSource();
+//	_ds.setJdbcUrl("jdbc:sqlite:/home/manlio/Linguaggi/template/servlet6/src/main/db/test.db");
+	
+	private DataSource _ds;
+	
+	@Override
+	public void init() throws ServletException {
+		try {
+			_ds = (DataSource)new InitialContext().lookup("java:/comp/env/jdbc/ds");
+		} catch (NamingException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		Connection connection = null;
+		try {
+			connection = _ds.getConnection();
+			String sql = "CREATE TABLE IF NOT EXISTS hikariiiifromxmlXXX (\n"
+	                + "	id integer PRIMARY KEY,\n"
+	                + "	name text NOT NULL,\n"
+	                + "	capacity real\n"
+	                + ");";
+			
+			connection.createStatement().execute(sql);
+			
+			connection.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 		
 		if(req.getRequestURI().equals("/try/me")){
 			resp.getWriter().write("<h1>you did it!</h1>");

@@ -1,0 +1,23 @@
+<Configure  class="org.eclipse.jetty.webapp.WebAppContext">
+    <New id="DSTest" class="org.eclipse.jetty.plus.jndi.Resource">
+     <Arg></Arg>
+     <Arg>jdbc/ds</Arg>
+     <Arg>
+       <New class="com.zaxxer.hikari.HikariDataSource">
+         <Arg>
+            <New class="com.zaxxer.hikari.HikariConfig">
+<!--                <Set name="minimumPoolSize">5</Set> -->
+<!--                <Set name="maximumPoolSize">20</Set> -->
+               <Set name="dataSourceClassName">org.sqlite.SQLiteDataSource</Set>
+<!--                <Set name="username">jdbc.user</Set> -->
+<!--                <Set name="password">jdbc.pass</Set> -->
+               <Call name="addDataSourceProperty">
+                  <Arg>url</Arg>
+                  <Arg>jdbc:sqlite:/home/manlio/Linguaggi/template/servlet6/src/main/db/test.db</Arg>
+               </Call>
+            </New>
+         </Arg>
+      </New>
+    </Arg>
+  </New>
+</Configure>
