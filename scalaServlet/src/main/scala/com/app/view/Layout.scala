@@ -1,4 +1,4 @@
-package com.javaconverter.view
+package com.app.view
 import  com.github.manliogit.javatags.lang.HtmlHelper._
 import com.github.manliogit.javatags.element.Element
 

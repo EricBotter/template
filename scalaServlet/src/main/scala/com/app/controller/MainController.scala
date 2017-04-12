@@ -1,6 +1,6 @@
 package com.app.controller
 
-import com.javaconverter.view.Layout
+import com.app.view.Layout
 
 class MainController extends Controller {
 	
