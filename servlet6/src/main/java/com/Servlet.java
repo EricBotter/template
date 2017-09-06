@@ -2,8 +2,6 @@ package com;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Arrays;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -13,12 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.sqlite.javax.SQLiteConnectionPoolDataSource;
-
 import com.app.controller.Context;
 import com.app.controller.Controller;
-import com.app.controller.MainController;
-import com.zaxxer.hikari.HikariDataSource;
 
 public class Servlet extends HttpServlet {
 
@@ -43,8 +37,8 @@ public class Servlet extends HttpServlet {
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		for(Controller c : Arrays.asList(new MainController())){
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		for(Controller c : new ControllerFactory().create()){
 			if(c.handles(req.getRequestURI())){
 				try {
 					Connection connection = _ds.getConnection();
