@@ -7,8 +7,9 @@ public class Profile {
 	
 		int sum = 0;
 		
+		Calc calc = new Calc();
 		for (int value = 0; value <= limit; value++) {
-			sum = new Calc().accumulate(sum, value);
+			sum = calc.accumulate(sum, value);
 		}
 		
 		return sum;

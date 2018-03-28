@@ -6,11 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.controller.Controller;
+import com.app.controller.CourseCreateController;
+import com.app.controller.CourseCsvController;
+import com.app.controller.CourseHtmlController;
+import com.app.controller.CourseRawController;
 import com.app.controller.MainController;
 
 public class ControllerFactory {
 
 	public List<Controller> create() {
-		return new ArrayList<Controller>(asList(new MainController()));
+		return new ArrayList<>(asList(
+				new MainController(),
+				new CourseCreateController(),
+				new CourseCsvController(),
+				new CourseRawController(),
+				new CourseHtmlController()
+			));
 	}
 }

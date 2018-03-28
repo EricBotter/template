@@ -1,8 +1,14 @@
 package com.app.controller;
 
-public interface Controller {
+public abstract class Controller {
 
-	boolean handles(String route);
-	void execute(Context context) throws Exception;
+	public abstract boolean handles(String route);
+	public abstract void execute(Context context) throws Exception;
+	
+	protected void writeBasicResponse(Context context, String contentType, String output) throws Exception {
+		context.response().setContentType(contentType);
+		context.response().setCharacterEncoding("UTF-8");
+		context.response().getWriter().write(output);
+	}
 	
 }

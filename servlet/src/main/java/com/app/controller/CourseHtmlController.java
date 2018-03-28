@@ -1,19 +1,20 @@
 package com.app.controller;
 
-import com.app.view.Layout;
+import seminar.HtmlRenderer;
 
-public class MainController extends Controller {
+public class CourseHtmlController extends CourseController {
 
 	@Override
 	public boolean handles(String route) {
-		return "/".equals(route);
+		return route.equals("/course/html");
 	}
 
 	@Override
 	public void execute(Context context) throws Exception {
 		String contentType = "text/html";
-		String output = new Layout().build().render();
-	
+		String output = new HtmlRenderer().output(getSeminar());
+		
 		writeBasicResponse(context, contentType, output);
 	}
+	
 }

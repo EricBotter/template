@@ -1,0 +1,7 @@
+Nel metodo Order.writeOrder, ci sono commenti che evidenziano una parte di codice che ha uno scopo diverso da quello del metodo, ovvero il calcolo del totale.
+Lo stesso codice si trova anche nel metodo Order.getTotal.
+Il metodo Order.writeOrder prende anche un Order come parametro, invece di usare this.
+Nella classe lineItem ci sono dei metodi che sembrano voler implemetare una lista di LineItem, che andrebbero spostati in una classe apposita.
+La classe apposita esiste, e contiene esattamente gli stessi metodi in lineItem, quindi abbiamo codice duplicato.
+I metodi Order.writeOrder e Order.saveOrder sembrano avere compiti al di fuori dell'Order, e probabilmente potrebbero essere spotati in una classe a parte.
+Il metodo Order.getTotal fa operazioni su dati ottenuti esclusivamente da lineItem. Possiamo spostare quelle operazioni in lineItem.

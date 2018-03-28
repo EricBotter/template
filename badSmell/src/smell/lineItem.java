@@ -1,28 +1,17 @@
 package smell;
 
-import java.util.Vector;
- 
 class lineItem {
     protected int productId;
     private int ImageID;
     private int qty;
     private int Unitprice;
-	private Vector LineItems;
  
     public lineItem(int prodID, int ImageID, int inQty) {
         productId = prodID;
         this.ImageID = ImageID;
         qty = inQty;
     }
- 
-    public void setLineItems(Vector lineItems) {
-        LineItems = lineItems;
-    }
- 
-    Vector getLineItems() {
-        return LineItems;
-    }
- 
+
     int getProductID() {
         return productId;
     }
@@ -54,4 +43,8 @@ class lineItem {
     public void setUnitPrice(int i) {
         Unitprice = i;
     }
+    
+	public int getLineTotal() {
+		return getUnitPrice() * getQuantity();
+	}
 }
