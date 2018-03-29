@@ -14,6 +14,6 @@ public class MainController extends Controller {
 		String contentType = "text/html";
 		String output = new Layout().build().render();
 	
-		writeBasicResponse(context, contentType, output);
+		writeSimpleResponse(context, contentType, output);
 	}
 }

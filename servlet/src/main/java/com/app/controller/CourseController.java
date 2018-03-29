@@ -1,19 +1,22 @@
 package com.app.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import seminar.Course;
 import seminar.Seminar;
 
 public abstract class CourseController extends Controller {
 
-	private static Seminar _seminar = Seminar.defaultSeminar();
+	private static ArrayList<Seminar> _seminars = new ArrayList<>();
 	
-	protected Seminar getSeminar() {
-		return _seminar;
+	protected List<Seminar> getSeminars() {
+		return Collections.unmodifiableList(_seminars);
 	}
 	
-	protected void setSeminar(
+	protected void addSeminar(
 		String name,
 		String number,
 		String description,
@@ -28,7 +31,7 @@ public abstract class CourseController extends Controller {
 				Integer.parseInt(dateElements[2])
 			);
 		Course course = new Course(name, number, description, date);
-		_seminar = new Seminar(course, location, Integer.parseInt(seatsLeft));
+		_seminars.add(new Seminar(course, location, Integer.parseInt(seatsLeft)));
 	}
 	
 }

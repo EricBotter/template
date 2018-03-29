@@ -68,7 +68,7 @@ public class CourseCreateController extends CourseController {
 
 	@Override
 	public boolean handles(String route) {
-		return route.equals("/course/create");
+		return routeCheckWithSlashTolerance(route, "/course/create");
 	}
 
 	@Override
@@ -80,11 +80,11 @@ public class CourseCreateController extends CourseController {
 			String date = context.request().getParameter("date");
 			String location = context.request().getParameter("location");
 			String seats = context.request().getParameter("seats");
-			setSeminar(name, number, description, date, location, seats);
+			addSeminar(name, number, description, date, location, seats);
 			
-			context.response().sendRedirect("html");
+			context.response().sendRedirect("/course");
 		} else
-			writeBasicResponse(context, "text/html", _htmlPage);
+			writeSimpleResponse(context, "text/html", _htmlPage);
 	}
 
 }

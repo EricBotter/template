@@ -53,6 +53,6 @@ public class Servlet extends HttpServlet {
 				}
 			}
 		}
-		resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		ErrorResponses.sendNotFound(resp);
 	}
 }
