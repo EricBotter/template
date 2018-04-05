@@ -1,4 +1,8 @@
-package com.app.controller;
+package com.app.controller.course;
+
+import com.app.controller.Context;
+import com.app.controller.course.create.CourseCreationParameters;
+import com.app.view.CourseCreateLayout;
 
 public class CourseCreateController extends CourseController {
 	
@@ -74,17 +78,15 @@ public class CourseCreateController extends CourseController {
 	@Override
 	public void execute(Context context) throws Exception {
 		if (context.request().getMethod().equals("POST")) {
-			String name = context.request().getParameter("name");
-			String number = context.request().getParameter("number");
-			String description = context.request().getParameter("description");
-			String date = context.request().getParameter("date");
-			String location = context.request().getParameter("location");
-			String seats = context.request().getParameter("seats");
-			addSeminar(name, number, description, date, location, seats);
+			CourseCreationParameters params = new CourseCreationParameters(context.request());
 			
-			context.response().sendRedirect("/course");
+			if (params.isWholeInputValid()) {
+				addSeminar(params.getSeminar());
+				context.response().sendRedirect("/course");
+			} else {
+				writeSimpleResponse(context, "text/html", new CourseCreateLayout().build(params).render());
+			}
 		} else
-			writeSimpleResponse(context, "text/html", _htmlPage);
+			writeSimpleResponse(context, "text/html", new CourseCreateLayout().buildEmpty().render());
 	}
-
 }

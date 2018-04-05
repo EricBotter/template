@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.app.controller.course.CourseCreateController;
+
 public class CourseCreateControllerTest {
 
 	@Test

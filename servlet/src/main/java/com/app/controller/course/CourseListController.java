@@ -1,4 +1,6 @@
-package com.app.controller;
+package com.app.controller.course;
+
+import com.app.controller.Context;
 
 import seminar.Seminar;
 
@@ -21,5 +23,4 @@ public class CourseListController extends CourseController {
 		
 		writeSimpleResponse(context, "text/html", sb.toString());
 	}
-
 }
