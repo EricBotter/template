@@ -19,7 +19,7 @@ public class TotalSeatsParameter extends InputParameter {
 
 	@Override
 	public boolean isValid() {
-		return _value != null && _value.matches("^[0-9]+$");
+		return _value != null && _value.matches("^0*[1-9][0-9]*$");
 	}
 
 }

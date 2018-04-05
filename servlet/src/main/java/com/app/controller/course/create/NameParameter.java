@@ -16,4 +16,9 @@ public class NameParameter extends InputParameter {
 	public String getName() {
 		return "name";
 	}
+	
+	@Override
+	public boolean isValid() {
+		return _value != null && !_value.trim().equals("");
+	}
 }

@@ -15,9 +15,7 @@ public abstract class InputParameter {
 	
 	public abstract String getName();
 	
-	public boolean isValid() {
-		return _value != null && !_value.trim().equals("");
-	}
+	public abstract boolean isValid();
 	
 	public String getValue() {
 		return _value;

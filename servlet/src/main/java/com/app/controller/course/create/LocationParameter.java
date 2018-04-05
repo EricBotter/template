@@ -12,4 +12,9 @@ public class LocationParameter extends InputParameter {
 	public String getName() {
 		return "location";
 	}
+	
+	@Override
+	public boolean isValid() {
+		return _value != null && !_value.trim().equals("");
+	}
 }
