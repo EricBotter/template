@@ -23,7 +23,9 @@ public class NumberParameter extends InputParameter {
 	
 	@Override
 	public boolean isValid() {
-		return _value == null || _value.trim().equals("") || (
+		return _value == null || _value.trim().equals("") || 
+				(
+					_seats.isValid() &&
 					_value.matches("^[0-9]+$") &&
 					Integer.parseInt(_value) <= _seats.getIntegerValue()
 				);

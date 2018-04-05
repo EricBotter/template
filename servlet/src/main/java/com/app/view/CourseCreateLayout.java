@@ -6,10 +6,96 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.app.controller.course.create.CourseCreationParameters;
+import com.app.controller.course.create.InputParameter;
+import com.app.controller.course.create.StartDateParameter;
 import com.github.manliogit.javatags.element.Element;
 
 public class CourseCreateLayout {
 
+	public Element buildEmpty() {
+		return compileForm(
+			textField("name", "Name", "Introductory Seminar"),
+			textField("number", "Number", "101"),
+			textField("description", "Description", "Introduction to the Academy"),
+			startDateField(),
+			textField("location", "Location", "Room 3, main building"),
+			numberField("seats", "Tot. seats", "200")
+		);
+	}
+	
+	public Element build(CourseCreationParameters params) {
+		return compileForm(
+			textField(params.name, "Name", "Introductory Seminar", "Please enter a valid name"),
+			textField(params.number, "Number", "101", "Please enter a valid number (check total seats first)"),
+			textField(params.description, "Description", "Introduction to the Academy", "Please enter a valid description"),
+			startDateField(params.date),
+			textField(params.location, "Location", "Room 3, main building", "Please enter a valid location"),
+			numberField(params.seats, "Tot. seats", "200", "Please enter a valid number of seats")
+		);
+	}
+
+	private Element startDateField(StartDateParameter date) {
+		return div(attr("class -> form-group " + (date.isValid() ? "has-success" : "has-error")),
+			label(attr("for -> date", "class -> col-sm-2 control-label"), "Start date"),
+			div(attr("class -> col-sm-10"),
+				input(attr("type -> date", "class -> form-control", "id -> date", "name -> date",
+					"value -> " + date.getValue())),
+				date.isValid() ? empty() : span(attr("class -> help-block"), "Please enter a valid date")
+			)
+		);
+	}
+
+	private Element startDateField() {
+		return div(attr("class -> form-group"),
+				label(attr("for -> date", "class -> col-sm-2 control-label"), "Start date"),
+				div(attr("class -> col-sm-10"),
+						input(attr("type -> date", "class -> form-control", "id -> date", "name -> date"))
+				)
+			);
+	}
+	
+	private Element textField(InputParameter param, String label, String placeholder, String errorMessage) {
+		return div(attr("class -> form-group " + (param.isValid() ? "has-success" : "has-error")),
+			label(attr("for -> "+param.getName(), "class -> col-sm-2 control-label"), label),
+			div(attr("class -> col-sm-10"),
+				input(attr("type -> text", "class -> form-control", "id -> "+param.getName(), "name -> "+param.getName(),
+					"placeholder -> e.g. "+placeholder, "value -> " + param.getValue())),
+				param.isValid() ? empty() : span(attr("class -> help-block"), errorMessage)
+			)
+		);
+	}
+
+	private Element textField(String fieldName, String label, String placeholder) {
+		return div(attr("class -> form-group"),
+			label(attr("for -> "+fieldName, "class -> col-sm-2 control-label"), label),
+			div(attr("class -> col-sm-10"),
+				input(attr("type -> text", "class -> form-control", "id -> "+fieldName, "name -> "+fieldName,
+					"placeholder -> e.g. "+placeholder))
+			)
+		);
+	}
+
+	private Element numberField(InputParameter param, String label, String placeholder, String errorMessage) {
+		return div(attr("class -> form-group " + (param.isValid() ? "has-success" : "has-error")),
+			label(attr("for -> "+param.getName(), "class -> col-sm-2 control-label"), label),
+			div(attr("class -> col-sm-10"),
+				input(attr("type -> number", "class -> form-control", "id -> "+param.getName(), "name -> "+param.getName(),
+					"placeholder -> e.g. "+placeholder, "value -> " + param.getValue())),
+				param.isValid() ? empty() : span(attr("class -> help-block"), errorMessage)
+			)
+		);
+	}
+	
+	private Element numberField(String fieldName, String label, String placeholder) {
+		return div(attr("class -> form-group"),
+			label(attr("for -> "+fieldName, "class -> col-sm-2 control-label"), label),
+			div(attr("class -> col-sm-10"),
+				input(attr("type -> number", "class -> form-control", "id -> "+fieldName, "name -> "+fieldName,
+					"placeholder -> e.g. "+placeholder))
+			)
+		);
+	}
+	
 	private Element compileForm(Element... formElements) {
 		ArrayList<Element> elements = new ArrayList<>(Arrays.asList(formElements));
 		elements.add(
@@ -40,106 +126,6 @@ public class CourseCreateLayout {
 				),
 				script(attr("src -> /js/jquery.min.js")),
 				script(attr("src -> /js/bootstrap.min.js"))
-			)
-		);
-	}
-	
-	public Element buildEmpty() {
-		return compileForm(
-			div(attr("class -> form-group"),
-				label(attr("for -> name", "class -> col-sm-2 control-label"), "Name"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> text", "class -> form-control", "id -> name", "name -> name",
-						"placeholder -> e.g. Introductory Seminar"))
-				)
-			),
-			div(attr("class -> form-group"),
-				label(attr("for -> number", "class -> col-sm-2 control-label"), "Number"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> text", "class -> form-control", "id -> number", "name -> number",
-						"placeholder -> e.g. 101"))
-				)
-			),
-			div(attr("class -> form-group"),
-				label(attr("for -> description", "class -> col-sm-2 control-label"), "Description"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> text", "class -> form-control", "id -> description", "name -> description",
-						"placeholder -> e.g. Introduction to the Academy"))
-				)
-			),
-			div(attr("class -> form-group"),
-				label(attr("for -> date", "class -> col-sm-2 control-label"), "Start date"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> date", "class -> form-control", "id -> date", "name -> date"))
-				)
-			),
-			div(attr("class -> form-group"),
-				label(attr("for -> location", "class -> col-sm-2 control-label"), "Location"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> text", "class -> form-control", "id -> location", "name -> location",
-						"placeholder -> e.g. Room 3, main building"))
-				)
-			),
-			div(attr("class -> form-group"),
-				label(attr("for -> seats", "class -> col-sm-2 control-label"), "Tot. seats"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> number", "class -> form-control", "id -> seats", "name -> seats",
-						"placeholder -> e.g. 200"))
-				)
-			)
-		);
-	}
-	
-	
-	public Element build(CourseCreationParameters params) {
-		return compileForm(
-			div(attr("class -> form-group " + (params.name.isValid() ? "has-success" : "has-error")),
-				label(attr("for -> name", "class -> col-sm-2 control-label"), "Name"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> text", "class -> form-control", "id -> name", "name -> name",
-						"placeholder -> e.g. Introductory Seminar", "value -> " + params.name.getValue())),
-					(params.name.isValid() ? empty() : span(attr("class -> help-block"), "Please enter a valid name"))
-				)
-			),
-			div(attr("class -> form-group " + (params.number.isValid() ? "has-success" : "has-error")),
-				label(attr("for -> number", "class -> col-sm-2 control-label"), "Number"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> text", "class -> form-control", "id -> number", "name -> number",
-						"placeholder -> e.g. 101", "value -> " + params.number.getValue())),
-					(params.number.isValid() ? empty() : span(attr("class -> help-block"), "Please enter a valid number"))
-				)
-			),
-			div(attr("class -> form-group " + (params.description.isValid() ? "has-success" : "has-error")),
-				label(attr("for -> description", "class -> col-sm-2 control-label"), "Description"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> text", "class -> form-control", "id -> description", "name -> description",
-						"placeholder -> e.g. Introduction to the Academy", "value -> " + params.description.getValue())),
-					(params.description.isValid() ? empty() : span(attr("class -> help-block"), "Please enter a valid description"))
-				)
-			),
-			div(attr("class -> form-group " + (params.date.isValid() ? "has-success" : "has-error")),
-				label(attr("for -> date", "class -> col-sm-2 control-label"), "Start date"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> date", "class -> form-control", "id -> date", "name -> date",
-							"value -> " + params.date.getValue())),
-					(params.date.isValid() ? empty() : span(attr("class -> help-block"), "Please enter a valid date"))
-				)
-			),
-			div(attr("class -> form-group " + (params.location.isValid() ? "has-success" : "has-error")),
-				label(attr("for -> location", "class -> col-sm-2 control-label"), "Location"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> text", "class -> form-control", "id -> location", "name -> location",
-						"placeholder -> e.g. Room 3, main building", "value -> " + params.location.getValue())),
-					(params.location.isValid() ? empty() : span(attr("class -> help-block"), "Please enter a valid location"))
-				)
-			),
-			div(attr("class -> form-group " + (params.seats.isValid() ? "has-success" : "has-error")),
-				label(attr("for -> seats", "class -> col-sm-2 control-label"), "Tot. seats"),
-				div(attr("class -> col-sm-10"),
-					input(attr("type -> number", "class -> form-control", "id -> seats", "name -> seats",
-						"placeholder -> e.g. 200", "value -> " + params.seats.getValue())),
-					(params.seats.isValid() ? empty() : span(attr("class -> help-block"), "Please enter a valid number of seats"))
-				)
 			)
 		);
 	}
