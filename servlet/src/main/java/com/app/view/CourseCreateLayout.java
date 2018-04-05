@@ -35,11 +35,14 @@ public class CourseCreateLayout {
 	}
 
 	private Element startDateField(StartDateParameter date) {
-		return div(attr("class -> form-group " + (date.isValid() ? "has-success" : "has-error")),
+		return div(attr("class -> form-group " + (date.isValid() ? "has-success" : "has-error") + " has-feedback"),
 			label(attr("for -> date", "class -> col-sm-2 control-label"), "Start date"),
 			div(attr("class -> col-sm-10"),
 				input(attr("type -> date", "class -> form-control", "id -> date", "name -> date",
 					"value -> " + date.getValue())),
+				date.isValid() ?
+						span(attr("class -> glyphicon glyphicon-ok form-control-feedback")) :
+						span(attr("class -> glyphicon glyphicon-remove form-control-feedback")),
 				date.isValid() ? empty() : span(attr("class -> help-block"), "Please enter a valid date")
 			)
 		);
@@ -55,11 +58,14 @@ public class CourseCreateLayout {
 	}
 	
 	private Element textField(InputParameter param, String label, String placeholder, String errorMessage) {
-		return div(attr("class -> form-group " + (param.isValid() ? "has-success" : "has-error")),
+		return div(attr("class -> form-group " + (param.isValid() ? "has-success" : "has-error") + " has-feedback"),
 			label(attr("for -> "+param.getName(), "class -> col-sm-2 control-label"), label),
 			div(attr("class -> col-sm-10"),
 				input(attr("type -> text", "class -> form-control", "id -> "+param.getName(), "name -> "+param.getName(),
 					"placeholder -> e.g. "+placeholder, "value -> " + param.getValue())),
+				param.isValid() ?
+						span(attr("class -> glyphicon glyphicon-ok form-control-feedback")) :
+						span(attr("class -> glyphicon glyphicon-remove form-control-feedback")),
 				param.isValid() ? empty() : span(attr("class -> help-block"), errorMessage)
 			)
 		);
@@ -76,11 +82,14 @@ public class CourseCreateLayout {
 	}
 
 	private Element numberField(InputParameter param, String label, String placeholder, String errorMessage) {
-		return div(attr("class -> form-group " + (param.isValid() ? "has-success" : "has-error")),
+		return div(attr("class -> form-group " + (param.isValid() ? "has-success" : "has-error") + " has-feedback"),
 			label(attr("for -> "+param.getName(), "class -> col-sm-2 control-label"), label),
 			div(attr("class -> col-sm-10"),
 				input(attr("type -> number", "class -> form-control", "id -> "+param.getName(), "name -> "+param.getName(),
 					"placeholder -> e.g. "+placeholder, "value -> " + param.getValue())),
+				param.isValid() ?
+						span(attr("class -> glyphicon glyphicon-ok form-control-feedback")) :
+						span(attr("class -> glyphicon glyphicon-remove form-control-feedback")),
 				param.isValid() ? empty() : span(attr("class -> help-block"), errorMessage)
 			)
 		);
