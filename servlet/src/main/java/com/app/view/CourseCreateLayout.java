@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.app.controller.course.create.CourseCreationParameters;
+import com.app.controller.course.create.InputError;
 import com.app.controller.course.create.InputParameter;
 import com.app.controller.course.create.StartDateParameter;
 import com.github.manliogit.javatags.element.Element;
@@ -25,26 +26,30 @@ public class CourseCreateLayout {
 	
 	public Element build(CourseCreationParameters params) {
 		return compileForm(
-			textField(params.name, "Name", "Introductory Seminar", "Please enter a valid name"),
-			textField(params.number, "Number", "101", "Please enter a valid number (check total seats first)"),
-			textField(params.description, "Description", "Introduction to the Academy", "Please enter a valid description"),
+			textField(params.name, "Name", "Introductory Seminar"),
+			textField(params.number, "Number", "101"),
+			textField(params.description, "Description", "Introduction to the Academy"),
 			startDateField(params.date),
-			textField(params.location, "Location", "Room 3, main building", "Please enter a valid location"),
-			numberField(params.seats, "Tot. seats", "200", "Please enter a valid number of seats")
+			textField(params.location, "Location", "Room 3, main building"),
+			numberField(params.seats, "Tot. seats", "200")
 		);
 	}
 
 	private Element startDateField(StartDateParameter date) {
-		return div(attr("class -> form-group " + (date.isValid() ? "has-success" : "has-error") + " has-feedback"),
-			label(attr("for -> date", "class -> col-sm-2 control-label"), "Start date"),
-			div(attr("class -> col-sm-10"),
+		ArrayList<Element> divElements = new ArrayList<>(Arrays.asList(
 				input(attr("type -> date", "class -> form-control", "id -> date", "name -> date",
 					"value -> " + date.getValue())),
-				date.isValid() ?
-						span(attr("class -> glyphicon glyphicon-ok form-control-feedback")) :
-						span(attr("class -> glyphicon glyphicon-remove form-control-feedback")),
-				date.isValid() ? empty() : span(attr("class -> help-block"), "Please enter a valid date")
-			)
+				date.validate().isEmpty() ?
+					span(attr("class -> glyphicon glyphicon-ok form-control-feedback")) :
+					span(attr("class -> glyphicon glyphicon-remove form-control-feedback"))
+				));
+		for (InputError e : date.validate()) {
+			divElements.add(span(attr("class -> help-block"), e.getMessage()));
+		}
+
+		return div(attr("class -> form-group " + (date.validate().isEmpty() ? "has-success" : "has-error") + " has-feedback"),
+			label(attr("for -> date", "class -> col-sm-2 control-label"), "Start date"),
+			div(attr("class -> col-sm-10"), divElements)
 		);
 	}
 
@@ -57,17 +62,21 @@ public class CourseCreateLayout {
 			);
 	}
 	
-	private Element textField(InputParameter param, String label, String placeholder, String errorMessage) {
-		return div(attr("class -> form-group " + (param.isValid() ? "has-success" : "has-error") + " has-feedback"),
-			label(attr("for -> "+param.getName(), "class -> col-sm-2 control-label"), label),
-			div(attr("class -> col-sm-10"),
+	private Element textField(InputParameter param, String label, String placeholder) {
+		ArrayList<Element> divElements = new ArrayList<>(Arrays.asList(
 				input(attr("type -> text", "class -> form-control", "id -> "+param.getName(), "name -> "+param.getName(),
 					"placeholder -> e.g. "+placeholder, "value -> " + param.getValue())),
-				param.isValid() ?
-						span(attr("class -> glyphicon glyphicon-ok form-control-feedback")) :
-						span(attr("class -> glyphicon glyphicon-remove form-control-feedback")),
-				param.isValid() ? empty() : span(attr("class -> help-block"), errorMessage)
-			)
+				param.validate().isEmpty() ?
+					span(attr("class -> glyphicon glyphicon-ok form-control-feedback")) :
+					span(attr("class -> glyphicon glyphicon-remove form-control-feedback"))
+		));
+		for (InputError e : param.validate()) {
+			divElements.add(span(attr("class -> help-block"), e.getMessage()));
+		}
+
+		return div(attr("class -> form-group " + (param.validate().isEmpty() ? "has-success" : "has-error") + " has-feedback"),
+			label(attr("for -> "+param.getName(), "class -> col-sm-2 control-label"), label),
+			div(attr("class -> col-sm-10"), divElements)
 		);
 	}
 
@@ -81,17 +90,21 @@ public class CourseCreateLayout {
 		);
 	}
 
-	private Element numberField(InputParameter param, String label, String placeholder, String errorMessage) {
-		return div(attr("class -> form-group " + (param.isValid() ? "has-success" : "has-error") + " has-feedback"),
+	private Element numberField(InputParameter param, String label, String placeholder) {
+		ArrayList<Element> divElements = new ArrayList<>(Arrays.asList(
+			input(attr("type -> number", "class -> form-control", "id -> "+param.getName(), "name -> "+param.getName(),
+				"placeholder -> e.g. "+placeholder, "value -> " + param.getValue())),
+			param.validate().isEmpty() ?
+				span(attr("class -> glyphicon glyphicon-ok form-control-feedback")) :
+				span(attr("class -> glyphicon glyphicon-remove form-control-feedback"))
+		));
+		for (InputError e : param.validate()) {
+			divElements.add(span(attr("class -> help-block"), e.getMessage()));
+		}
+		
+		return div(attr("class -> form-group " + (param.validate().isEmpty() ? "has-success" : "has-error") + " has-feedback"),
 			label(attr("for -> "+param.getName(), "class -> col-sm-2 control-label"), label),
-			div(attr("class -> col-sm-10"),
-				input(attr("type -> number", "class -> form-control", "id -> "+param.getName(), "name -> "+param.getName(),
-					"placeholder -> e.g. "+placeholder, "value -> " + param.getValue())),
-				param.isValid() ?
-						span(attr("class -> glyphicon glyphicon-ok form-control-feedback")) :
-						span(attr("class -> glyphicon glyphicon-remove form-control-feedback")),
-				param.isValid() ? empty() : span(attr("class -> help-block"), errorMessage)
-			)
+			div(attr("class -> col-sm-10"), divElements)
 		);
 	}
 	
@@ -137,14 +150,5 @@ public class CourseCreateLayout {
 				script(attr("src -> /js/bootstrap.min.js"))
 			)
 		);
-	}
-
-	private Element empty() {
-		return new Element() {
-			@Override
-			public String render() {
-				return "";
-			}
-		};
 	}
 }

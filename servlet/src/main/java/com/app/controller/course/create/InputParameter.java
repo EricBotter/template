@@ -1,5 +1,7 @@
 package com.app.controller.course.create;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 public abstract class InputParameter {
@@ -15,7 +17,7 @@ public abstract class InputParameter {
 	
 	public abstract String getName();
 	
-	public abstract boolean isValid();
+	public abstract List<InputError> validate();
 	
 	public String getValue() {
 		return _value;

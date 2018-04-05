@@ -1,14 +1,14 @@
 package com.app.controller.course.create;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class NumberParameter extends InputParameter {
 
-	private final TotalSeatsParameter _seats;
-
 	public NumberParameter(HttpServletRequest request) {
 		super(request);
-		_seats = new TotalSeatsParameter(request);
 	}
 	
 	@Override
@@ -17,18 +17,11 @@ public class NumberParameter extends InputParameter {
 	}
 	
 	@Override
-	public String getValue() {
-		return _value == null || _value.trim().equals("") ? "0" : _value;
-	}
-	
-	@Override
-	public boolean isValid() {
-		return _value == null || _value.trim().equals("") || 
-				(
-					_seats.isValid() &&
-					_value.matches("^[0-9]+$") &&
-					Integer.parseInt(_value) <= _seats.getIntegerValue()
-				);
+	public List<InputError> validate() {
+		ArrayList<InputError> output = new ArrayList<>();
+		if (_value == null || _value.trim().equals(""))
+			output.add(new InputError("Number cannot be empty"));
+		return output;
 	}
 
 }
