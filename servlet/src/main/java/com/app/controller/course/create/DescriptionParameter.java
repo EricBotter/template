@@ -22,7 +22,7 @@ public class DescriptionParameter extends InputParameter {
 	}
 	
 	@Override
-	public List<InputError> validate() {
+	public List<InputError> getValidationErrors() {
 		return Collections.emptyList();
 	}
 

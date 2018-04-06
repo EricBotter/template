@@ -21,7 +21,7 @@ public class NameParameter extends InputParameter {
 	}
 	
 	@Override
-	public List<InputError> validate() {
+	public List<InputError> getValidationErrors() {
 		ArrayList<InputError> output = new ArrayList<>();
 		if (_value == null || _value.trim().equals(""))
 			output.add(new InputError("Name cannot be empty"));

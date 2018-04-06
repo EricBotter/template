@@ -17,7 +17,7 @@ public abstract class InputParameter {
 	
 	public abstract String getName();
 	
-	public abstract List<InputError> validate();
+	public abstract List<InputError> getValidationErrors();
 	
 	public String getValue() {
 		return _value;

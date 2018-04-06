@@ -22,7 +22,7 @@ public class StartDateParameter extends InputParameter {
 	}
 
 	@Override
-	public List<InputError> validate() {
+	public List<InputError> getValidationErrors() {
 		ArrayList<InputError> output = new ArrayList<>();
 		if (_value == null || _value.trim().equals(""))
 			output.add(new InputError("Date cannot be empty"));

@@ -38,6 +38,6 @@ public class CourseCreationParameters {
 	}
 
 	public boolean isWholeInputValid() {
-		return _paramList.stream().allMatch(param -> param.validate().size() == 0);
+		return _paramList.stream().allMatch(param -> param.getValidationErrors().size() == 0);
 	}
 }
