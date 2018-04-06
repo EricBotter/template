@@ -27,10 +27,14 @@ public class Course {
 		return _description;
 	}
 	
-	public String getStartDate() {
+	public String getStartDateAsString() {
 		return _startDate.get(GregorianCalendar.DAY_OF_MONTH) + "/"
 				+ _startDate.get(GregorianCalendar.MONTH) + "/"
 				+ _startDate.get(GregorianCalendar.YEAR);
+	}
+	
+	public GregorianCalendar getStartDate() {
+		return _startDate;
 	}
 
 	public static Course defaultCourse() {

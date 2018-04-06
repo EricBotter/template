@@ -6,7 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ DescriptionParameterTest.class, LocationParameterTest.class, NameParameterTest.class,
-		NumberParameterTest.class, StartDateParameterTest.class, TotalSeatsParameterTest.class })
+		StartDateParameterTest.class, TotalSeatsParameterTest.class })
 public class CourseCreateParametersTests {
 
 }

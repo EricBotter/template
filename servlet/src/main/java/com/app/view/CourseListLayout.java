@@ -100,7 +100,7 @@ public class CourseListLayout {
 					td(seminar.getCourse().getName()),
 					td(seminar.getLocation()),
 					td(String.valueOf(seminar.getSeatsLeft())),
-					td(seminar.getCourse().getStartDate())
+					td(seminar.getCourse().getStartDateAsString())
 				).render()
 			).collect(Collectors.joining("\n"));
 		

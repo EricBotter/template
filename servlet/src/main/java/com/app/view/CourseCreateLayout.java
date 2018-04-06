@@ -15,22 +15,20 @@ public class CourseCreateLayout {
 	public Element buildEmpty() {
 		return compileForm(
 			inputFieldEmpty("name", "text", "Name", "Introductory Seminar"),
-			inputFieldEmpty("number", "text", "Number", "101"),
 			inputFieldEmpty("description", "text", "Description", "Introduction to the Academy"),
 			inputFieldEmpty("date", "date", "Start Date", "2018-03-21"),
 			inputFieldEmpty("location", "text", "Location", "Room 3, main building"),
-			inputFieldEmpty("seats", "number", "Tot. seats", "200")
+			inputFieldEmpty("seats", "number", "Tot. seats", "50")
 		);
 	}
 	
 	public Element build(CourseCreationParameters params) {
 		return compileForm(
 			inputFieldWithData(params.name, "text", "Name", "Introductory Seminar"),
-			inputFieldWithData(params.number, "text", "Number", "101"),
 			inputFieldWithData(params.description, "text", "Description", "Introduction to the Academy"),
 			inputFieldWithData(params.date, "date", "Start Date", "2018-03-21"),
 			inputFieldWithData(params.location, "text", "Location", "Room 3, main building"),
-			inputFieldWithData(params.seats, "number", "Tot. seats", "200")
+			inputFieldWithData(params.seats, "number", "Tot. seats", "50")
 		);
 	}
 

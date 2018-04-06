@@ -10,7 +10,6 @@ import seminar.Seminar;
 
 public class CourseCreationParameters {
 	public final NameParameter name;
-	public final NumberParameter number;
 	public final DescriptionParameter description;
 	public final StartDateParameter date;
 	public final LocationParameter location;
@@ -19,18 +18,17 @@ public class CourseCreationParameters {
 	
 	public CourseCreationParameters(HttpServletRequest request) {
 		name = new NameParameter(request);
-		number = new NumberParameter(request);
 		description = new DescriptionParameter(request);
 		location = new LocationParameter(request);
 		date = new StartDateParameter(request);
 		seats = new TotalSeatsParameter(request);
-		_paramList = Arrays.asList(name, number, description, location, date, seats);
+		_paramList = Arrays.asList(name, description, location, date, seats);
 	}
 	
 	public Seminar getSeminar() {
 		Course c = new Course(
 				name.getValue(),
-				number.getValue(),
+				"0",
 				description.getValue(),
 				date.getCalendarValue()
 			);

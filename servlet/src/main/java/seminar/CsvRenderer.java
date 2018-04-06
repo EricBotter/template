@@ -9,7 +9,7 @@ public class CsvRenderer extends Renderer {
     			seminar.getCourse().getName(),
     			seminar.getDescription(),
     			seminar.getLocation(),
-    			seminar.getCourse().getStartDate(),
+    			seminar.getCourse().getStartDateAsString(),
     			String.valueOf(seminar.getSeatsLeft())
     	}) + "\n";
 	}
