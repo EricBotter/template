@@ -7,6 +7,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 public class StartDateParameter extends InputParameter {
+	
+	StartDateParameter(String value) {
+		super(value);
+	}
 
 	public StartDateParameter(HttpServletRequest request) {
 		super(request);

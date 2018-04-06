@@ -6,6 +6,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 public class TotalSeatsParameter extends InputParameter {
+	
+	TotalSeatsParameter(String value) {
+		super(value);
+	}
 
 	public TotalSeatsParameter(HttpServletRequest request) {
 		super(request);

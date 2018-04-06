@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 
 public class DescriptionParameter extends InputParameter {
 
-	protected DescriptionParameter(HttpServletRequest request) {
+	DescriptionParameter(String value) {
+		super(value);
+	}
+	
+	public DescriptionParameter(HttpServletRequest request) {
 		super(request);
 	}
 

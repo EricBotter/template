@@ -6,6 +6,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 public class NumberParameter extends InputParameter {
+	
+	NumberParameter(String value) {
+		super(value);
+	}
 
 	public NumberParameter(HttpServletRequest request) {
 		super(request);

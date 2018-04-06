@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 
 public class NameParameter extends InputParameter {
 	
-	public NameParameter(HttpServletRequest request) {
-		super(request);
+	NameParameter(String value) {
+		super(value);
 	}
 	
-	public NameParameter() {
-		super((String)null);
+	public NameParameter(HttpServletRequest request) {
+		super(request);
 	}
 	
 	@Override

@@ -6,6 +6,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 public class LocationParameter extends InputParameter {
+	
+	LocationParameter(String value) {
+		super(value);
+	}
 
 	public LocationParameter(HttpServletRequest request) {
 		super(request);
