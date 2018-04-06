@@ -1,26 +1,19 @@
 package com.app.controller.course;
 
 import com.app.controller.Context;
-
-import seminar.Seminar;
+import com.app.view.CourseListLayout;
 
 public class CourseListController extends CourseController {
 
 	@Override
 	public boolean handles(String route) {
-		return routeCheckWithSlashTolerance(route, "/course");
+		return routeCheckWithSlashTolerance(route, "/course") ||
+			routeCheckWithSlashTolerance(route, "/");
 	}
 
 	@Override
 	public void execute(Context context) throws Exception {
-		StringBuilder sb = new StringBuilder();
-		sb.append("<html><head><title>Course List</title></head>"
-				+ "<body><h1>Course List</h1><ul>");
-		for (Seminar s : getSeminars()) {
-			sb.append("<li>" + s.getName() + "</li>");
-		}
-		sb.append("</ul></body></html>");
-		
-		writeSimpleResponse(context, "text/html", sb.toString());
+		writeSimpleResponse(context, "text/html",
+				new CourseListLayout().buildAndRender(getSeminars()));
 	}
 }
