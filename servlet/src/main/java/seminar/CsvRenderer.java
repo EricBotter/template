@@ -5,11 +5,11 @@ public class CsvRenderer extends Renderer {
 	@Override
 	String getHeader(Seminar seminar) {
 		return String.join(";", new String[] {
-    			seminar.getCourse().getNumber(),
-    			seminar.getCourse().getName(),
+    			seminar.getId(),
+    			seminar.getName(),
     			seminar.getDescription(),
     			seminar.getLocation(),
-    			seminar.getCourse().getStartDateAsString(),
+    			seminar.getStartDateAsString(),
     			String.valueOf(seminar.getSeatsLeft())
     	}) + "\n";
 	}

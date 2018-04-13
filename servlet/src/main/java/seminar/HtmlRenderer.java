@@ -9,7 +9,7 @@ public class HtmlRenderer extends Renderer {
     			+ "\t<div>" + seminar.getName() + ":</div>\n\t<ul>\n"
     			+ "\t\t<li>" + seminar.getDescription() + "</li>\n"
     			+ "\t\t<li>" + seminar.getLocation() + "</li>\n"
-    			+ "\t\t<li>" + seminar.getCourse().getStartDateAsString() + "</li>\n"
+    			+ "\t\t<li>" + seminar.getStartDateAsString() + "</li>\n"
     			+ "\t\t<li>" + seminar.getSeatsLeft() + "</li>\n"
     			+ "\t</ul>\n\t<div>partecipanti:</div>\n\t<ul>\n";
 	}

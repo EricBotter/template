@@ -1,33 +1,50 @@
 package seminar;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Seminar {
 
-	private final Course _course;
+	private final String _name;
+	private final String _id;
+	private final String _description;
+	private final GregorianCalendar _startDate;
 	private final List<Enrollment> _enrollments;
 
 	private String _location;
 	private int _seatsLeft;
 
-	public Seminar(Course course, String location, int seatsLeft) {
-		_course = course;
+	public Seminar(String name, String id, String description, GregorianCalendar startDate, String location, int seatsLeft) {
+		_name = name;
+		_id = id;
+		_description = description;
+		_startDate = startDate;
 		_location = location;
 		_seatsLeft = seatsLeft;
 		_enrollments = new ArrayList<>();
 	}
 
-	public Course getCourse() {
-		return _course;
-	}
-	
 	public String getName() {
-		return _course.getName() + " " + _course.getNumber();
+		return _name;
+	}
+
+	public String getId() {
+		return _id;
 	}
 
 	public String getDescription() {
-		return _course.getDescription();
+		return _description;
+	}
+
+	public String getStartDateAsString() {
+		return _startDate.get(GregorianCalendar.DAY_OF_MONTH) + "/"
+				+ _startDate.get(GregorianCalendar.MONTH) + "/"
+				+ _startDate.get(GregorianCalendar.YEAR);
+	}
+	
+	public GregorianCalendar getStartDate() {
+		return _startDate;
 	}
 
 	public String getLocation() {
@@ -67,9 +84,9 @@ public class Seminar {
     public static Seminar defaultSeminar() {
     	Student s1 = new Student("Eric", "Botter");
         Student s2 = new Student("Marco", "Verdi");
-		Course course = Course.defaultCourse();
 
-		Seminar seminar = new Seminar(course, "Room 3", 100);
+		Seminar seminar = new Seminar("Intro", "101", "Introduction Course",
+				new GregorianCalendar(2018, 3, 8), "Room 3", 100);
         seminar.enrolStudent(s1);
         seminar.enrolStudent(s2);
         return seminar;

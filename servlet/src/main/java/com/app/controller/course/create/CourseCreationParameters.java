@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import seminar.Course;
 import seminar.Seminar;
 
 public class CourseCreationParameters {
@@ -26,13 +25,13 @@ public class CourseCreationParameters {
 	}
 	
 	public Seminar getSeminar() {
-		Course c = new Course(
-				name.getValue(),
+		return new Seminar(name.getValue(),
 				"0",
 				description.getValue(),
-				date.getCalendarValue()
-			);
-		return new Seminar(c, location.getValue(), seats.getIntegerValue());
+				date.getCalendarValue(),
+				location.getValue(),
+				seats.getIntegerValue()
+		);
 	}
 
 	public boolean isWholeInputValid() {

@@ -96,11 +96,11 @@ public class CourseListLayout {
 	public String buildAndRender(List<Seminar> seminars) {
 		String content = seminars.stream().map(seminar ->
 				tr(
-					td(seminar.getCourse().getNumber()),
-					td(seminar.getCourse().getName()),
+					td(seminar.getId()),
+					td(seminar.getName()),
 					td(seminar.getLocation()),
 					td(String.valueOf(seminar.getSeatsLeft())),
-					td(seminar.getCourse().getStartDateAsString())
+					td(seminar.getStartDateAsString())
 				).render()
 			).collect(Collectors.joining("\n"));
 		

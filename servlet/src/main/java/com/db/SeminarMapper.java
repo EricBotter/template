@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import seminar.Course;
 import seminar.Seminar;
 
 public class SeminarMapper {
@@ -27,11 +26,11 @@ public class SeminarMapper {
 					"INSERT INTO Course(name, description, location, totalSeats, start) "
 					+ "VALUES (?, ?, ?, ?, ?)"
 				);
-			ps.setString(1, s.getCourse().getName());
-			ps.setString(2, s.getCourse().getDescription());
+			ps.setString(1, s.getName());
+			ps.setString(2, s.getDescription());
 			ps.setString(3, s.getLocation());
 			ps.setInt(4, s.getSeatsLeft());
-			ps.setDate(5, new Date(s.getCourse().getStartDate().getTimeInMillis()));
+			ps.setDate(5, new Date(s.getStartDate().getTimeInMillis()));
 			ps.execute();
 			
 			ps.close();
@@ -52,7 +51,10 @@ public class SeminarMapper {
 				GregorianCalendar gc = new GregorianCalendar();
 				gc.setTime(rs.getDate(6));
 				output.add(new Seminar(
-						new Course(rs.getString(2), String.valueOf(rs.getInt(1)), rs.getString(3), gc),
+						rs.getString(2),
+						String.valueOf(rs.getInt(1)),
+						rs.getString(3),
+						gc,
 						rs.getString(4),
 						rs.getInt(5)
 				));

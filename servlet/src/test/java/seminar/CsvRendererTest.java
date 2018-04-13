@@ -12,7 +12,7 @@ public class CsvRendererTest {
 		
 		String output = new CsvRenderer().output(seminar);
 		
-		assertTrue(output.contains(seminar.getCourse().getName()));
+		assertTrue(output.contains(seminar.getName()));
 		assertTrue(output.contains(seminar.getLocation()));
 		assertTrue(output.contains(seminar.getDescription()));
 		assertTrue(output.contains(String.valueOf(seminar.getSeatsLeft())));
