@@ -14,7 +14,7 @@ public class Seminar {
 	private final LocalDate _startDate;
 	private final List<Enrollment> _enrollments;
 
-	private String _location;
+	private final String _location;
 	private int _seatsLeft;
 
 	public Seminar(String name, String id, String description, LocalDate startDate, String location, int seatsLeft) {
@@ -63,16 +63,8 @@ public class Seminar {
 		return _location;
 	}
 
-	public void setLocation(String location) {
-		_location = location;
-	}
-
 	public int getSeatsLeft() {
 		return _seatsLeft;
-	}
-
-	public void setSeatsLeft(int seatsLeft) {
-		_seatsLeft = seatsLeft;
 	}
 
 	public List<Student> getStudentList() {

@@ -19,22 +19,21 @@ public class CourseViewController extends Controller {
 	public void execute(Context context) throws Exception {
 		String path = context.request().getServletPath();
 		String id = path.substring(path.lastIndexOf('/') + 1);
+		CourseCreationParameters params;
 
 		if (context.request().getMethod().equals("POST")) {
-			CourseCreationParameters params = new CourseCreationParameters(context.request());
+			params = new CourseCreationParameters(context.request());
 			
 			if (params.isWholeInputValid()) {
 				new SeminarMapper(context.connection()).updateSeminar(params.getSeminar());
 				context.response().sendRedirect("/course");
-			} else {
-				writeSimpleResponse(context, "text/html", new CourseCreateLayout().build(params).render());
+				return;
 			}
 		} else {
 			Seminar s = new SeminarMapper(context.connection()).getSeminar(id);
-			CourseCreationParameters params = new CourseCreationParameters(s);
-			writeSimpleResponse(context, "text/html",
-				new CourseCreateLayout().build(params).render());
+			params = new CourseCreationParameters(s);
 		}
+		
+		writeSimpleResponse(context, "text/html", new CourseCreateLayout().build(params).render());
 	}
-	
 }
