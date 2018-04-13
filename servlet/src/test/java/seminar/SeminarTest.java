@@ -3,7 +3,7 @@ package seminar;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ public class SeminarTest {
 
 	@Test
 	public void enrolStudent() {
-		Seminar seminar = new Seminar("Test", "10", "Desc", new GregorianCalendar(), "", 1);
+		Seminar seminar = new Seminar("Test", "10", "Desc", LocalDate.now(), "", 1);
 		Student s1 = new Student("Name", "Surname");
 		Student s2 = new Student("Name2", "Surname2");
 

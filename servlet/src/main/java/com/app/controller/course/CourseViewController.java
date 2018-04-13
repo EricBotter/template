@@ -6,25 +6,35 @@ import com.app.controller.course.create.CourseCreationParameters;
 import com.app.db.SeminarMapper;
 import com.app.view.CourseCreateLayout;
 
-public class CourseCreateController extends Controller {
-	
+import seminar.Seminar;
+
+public class CourseViewController extends Controller {
+
 	@Override
 	public boolean handles(String route) {
-		return routeCheckWithSlashTolerance(route, "/course/create");
+		return route.matches("^/course/[0-9]+$");
 	}
 
 	@Override
 	public void execute(Context context) throws Exception {
+		String path = context.request().getServletPath();
+		String id = path.substring(path.lastIndexOf('/') + 1);
+
 		if (context.request().getMethod().equals("POST")) {
 			CourseCreationParameters params = new CourseCreationParameters(context.request());
 			
 			if (params.isWholeInputValid()) {
-				new SeminarMapper(context.connection()).addSeminar(params.getSeminar());
+				new SeminarMapper(context.connection()).updateSeminar(params.getSeminar());
 				context.response().sendRedirect("/course");
 			} else {
 				writeSimpleResponse(context, "text/html", new CourseCreateLayout().build(params).render());
 			}
-		} else
-			writeSimpleResponse(context, "text/html", new CourseCreateLayout().buildEmpty().render());
+		} else {
+			Seminar s = new SeminarMapper(context.connection()).getSeminar(id);
+			CourseCreationParameters params = new CourseCreationParameters(s);
+			writeSimpleResponse(context, "text/html",
+				new CourseCreateLayout().build(params).render());
+		}
 	}
+	
 }

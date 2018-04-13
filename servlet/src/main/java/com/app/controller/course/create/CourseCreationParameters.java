@@ -13,7 +13,7 @@ public class CourseCreationParameters {
 	public final StartDateParameter date;
 	public final LocationParameter location;
 	public final TotalSeatsParameter seats;
-	private final List<InputParameter> _paramList;
+	public final IdParameter id;
 	
 	public CourseCreationParameters(HttpServletRequest request) {
 		name = new NameParameter(request);
@@ -21,12 +21,21 @@ public class CourseCreationParameters {
 		location = new LocationParameter(request);
 		date = new StartDateParameter(request);
 		seats = new TotalSeatsParameter(request);
-		_paramList = Arrays.asList(name, description, location, date, seats);
+		id = new IdParameter(request);
 	}
-	
+
+	public CourseCreationParameters(Seminar s) {
+		name = new NameParameter(s.getName());
+		description = new DescriptionParameter(s.getDescription());
+		location = new LocationParameter(s.getLocation());
+		date = new StartDateParameter(s.getStartDateForSql());
+		seats = new TotalSeatsParameter(String.valueOf(s.getSeatsLeft()));
+		id = new IdParameter(s.getId());
+	}
+
 	public Seminar getSeminar() {
 		return new Seminar(name.getValue(),
-				"0",
+				id.getValue(),
 				description.getValue(),
 				date.getCalendarValue(),
 				location.getValue(),
@@ -34,7 +43,12 @@ public class CourseCreationParameters {
 		);
 	}
 
+	public List<InputParameter> getParameterList() {
+		return Arrays.asList(id, name, description, location, date, seats);
+	}
+
 	public boolean isWholeInputValid() {
-		return _paramList.stream().allMatch(param -> param.getValidationErrors().size() == 0);
+		return getParameterList().stream()
+				.allMatch(param -> param.getValidationErrors().isEmpty());
 	}
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.app.controller.course.create.CourseCreationParameters;
+import com.app.controller.course.create.IdParameter;
 import com.app.controller.course.create.InputError;
 import com.app.controller.course.create.InputParameter;
 import com.github.manliogit.javatags.element.Element;
@@ -14,6 +15,7 @@ public class CourseCreateLayout {
 
 	public Element buildEmpty() {
 		return compileForm(
+			hiddenIdInput(),
 			inputFieldEmpty("name", "text", "Name", "Introductory Seminar"),
 			inputFieldEmpty("description", "text", "Description", "Introduction to the Academy"),
 			inputFieldEmpty("date", "date", "Start Date", "2018-03-21"),
@@ -21,9 +23,10 @@ public class CourseCreateLayout {
 			inputFieldEmpty("seats", "number", "Tot. seats", "50")
 		);
 	}
-	
+
 	public Element build(CourseCreationParameters params) {
 		return compileForm(
+			hiddenIdInput(params.id),
 			inputFieldWithData(params.name, "text", "Name", "Introductory Seminar"),
 			inputFieldWithData(params.description, "text", "Description", "Introduction to the Academy"),
 			inputFieldWithData(params.date, "date", "Start Date", "2018-03-21"),
@@ -60,6 +63,15 @@ public class CourseCreateLayout {
 		);
 	}
 	
+	private Element hiddenIdInput() {
+		return hiddenIdInput(new IdParameter("0"));
+	}
+
+	private Element hiddenIdInput(IdParameter param) {
+		return input(attr("type -> hidden", "class -> form-control", "id -> id", "name -> id",
+				"value -> " + param.getValue()));
+	}
+
 	private Element compileForm(Element... formElements) {
 		ArrayList<Element> elements = new ArrayList<>(Arrays.asList(formElements));
 		elements.add(

@@ -63,11 +63,11 @@ public class CourseListLayout {
 			"      <table class=\"table table-striped\">\n" + 
 			"       <thead>\n" + 
 			"        <tr>\n" + 
-			"         <th>id</th>\n" + 
 			"         <th>name</th>\n" + 
 			"         <th>location</th>\n" + 
 			"         <th>totalSeats</th>\n" + 
 			"         <th>start</th>\n" + 
+			"         <th>actions</th>\n" + 
 			"        </tr>\n" + 
 			"       </thead>\n" + 
 			"       <tbody>";
@@ -96,11 +96,12 @@ public class CourseListLayout {
 	public String buildAndRender(List<Seminar> seminars) {
 		String content = seminars.stream().map(seminar ->
 				tr(
-					td(seminar.getId()),
-					td(seminar.getName()),
+					td(a(attr("href -> /course/" + seminar.getId()),
+						seminar.getName())),
 					td(seminar.getLocation()),
 					td(String.valueOf(seminar.getSeatsLeft())),
-					td(seminar.getStartDateAsString())
+					td(seminar.getStartDateAsString()),
+					td(a(attr("href->/course/delete/" + seminar.getId()), "delete"))
 				).render()
 			).collect(Collectors.joining("\n"));
 		

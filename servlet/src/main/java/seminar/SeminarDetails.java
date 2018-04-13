@@ -1,5 +1,5 @@
 package seminar;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 public class SeminarDetails {
 
@@ -14,7 +14,7 @@ public class SeminarDetails {
         Student s2 = new Student("Marco", "Verdi");
 
 		Seminar seminar = new Seminar("Intro", "101", "Introduction Course",
-				new GregorianCalendar(2018, 3, 8), "Room 3", 100);
+				LocalDate.of(2018, 3, 8), "Room 3", 100);
         seminar.enrolStudent(s1);
         seminar.enrolStudent(s2);
 

@@ -3,7 +3,7 @@ package com.app.controller.course.create;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.util.GregorianCalendar;
+import java.time.Month;
 
 import org.junit.Test;
 
@@ -25,9 +25,9 @@ public class StartDateParameterTest {
 
 	@Test
 	public void testGetCalendarValue() {
-		assertThat(defaultDate().getCalendarValue().get(GregorianCalendar.MONTH), is(1));
-		assertThat(defaultDate().getCalendarValue().get(GregorianCalendar.DAY_OF_MONTH), is(1));
-		assertThat(defaultDate().getCalendarValue().get(GregorianCalendar.YEAR), is(2018));
+		assertThat(defaultDate().getCalendarValue().getDayOfMonth(), is(1));
+		assertThat(defaultDate().getCalendarValue().getMonth(), is(Month.JANUARY));
+		assertThat(defaultDate().getCalendarValue().getYear(), is(2018));
 		
 		try {
 			nullDate().getCalendarValue();

@@ -2,8 +2,8 @@ package com.app.controller.course;
 
 import com.app.controller.Context;
 import com.app.controller.Controller;
+import com.app.db.SeminarMapper;
 import com.app.view.CourseListLayout;
-import com.db.SeminarMapper;
 
 public class CourseListController extends Controller {
 
