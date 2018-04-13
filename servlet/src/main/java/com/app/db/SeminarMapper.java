@@ -5,132 +5,61 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import seminar.Seminar;
 
-public class SeminarMapper {
+public class SeminarMapper extends Mapper<Seminar> {
 
-	private final Connection _connection;
-	
 	public SeminarMapper(Connection connection) {
-		_connection = connection;
-	}
-	
-	public void addSeminar(Seminar s) {
-		try {
-			PreparedStatement ps = _connection.prepareStatement(
-					"INSERT INTO Course(name, description, location, totalSeats, start) "
-					+ "VALUES (?, ?, ?, ?, ?)"
-				);
-			ps.setString(1, s.getName());
-			ps.setString(2, s.getDescription());
-			ps.setString(3, s.getLocation());
-			ps.setInt(4, s.getSeatsLeft());
-			ps.setDate(5, Date.valueOf(s.getStartDate()));
-			ps.execute();
-			
-			ps.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	public void updateSeminar(Seminar s) {
-		try {
-			PreparedStatement ps = _connection.prepareStatement(
-					"UPDATE Course SET name = ?, description = ?, location = ?,"
-							+ "totalSeats = ?, start = ? WHERE id = ?"
-					);
-			ps.setString(1, s.getName());
-			ps.setString(2, s.getDescription());
-			ps.setString(3, s.getLocation());
-			ps.setInt(4, s.getSeatsLeft());
-			ps.setDate(5, Date.valueOf(s.getStartDate()));
-			ps.setInt(6, Integer.valueOf(s.getId()));
-			ps.execute();
-			
-			ps.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	public List<Seminar> getSeminars() {
-		ArrayList<Seminar> output = new ArrayList<>();
-		try {
-			PreparedStatement ps = _connection.prepareStatement(
-					"SELECT id, name, description, location, totalSeats, start FROM Course"
-				);
-			ResultSet rs = ps.executeQuery();
-			
-			while (rs.next()) {
-				output.add(new Seminar(
-						rs.getString(2),
-						String.valueOf(rs.getInt(1)),
-						rs.getString(3),
-						rs.getDate(6).toLocalDate(),
-						rs.getString(4),
-						rs.getInt(5)
-				));
-			}
-			
-			rs.close();
-			ps.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		return Collections.unmodifiableList(output);
+		super(connection);
 	}
 
-	public Seminar getSeminar(String id) {
-		Seminar output = null;
-		try {
-			PreparedStatement ps = _connection.prepareStatement(
-					"SELECT id, name, description, location, totalSeats, start FROM Course "
-					+ "WHERE id = ?"
-				);
-			ps.setString(1, id);
-			ResultSet rs = ps.executeQuery();
-			
-			if (rs.next()) {
-				output = new Seminar(
-						rs.getString(2),
-						String.valueOf(rs.getInt(1)),
-						rs.getString(3),
-						rs.getDate(6).toLocalDate(),
-						rs.getString(4),
-						rs.getInt(5)
-				);
-			} else {
-				System.out.println("No results!!!");
-			}
-			
-			rs.close();
-			ps.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		
-		return output;
+	@Override
+	protected String insertQuery() {
+		return "INSERT INTO Course(name, description, location, totalSeats, start) VALUES (?, ?, ?, ?, ?)";
 	}
-	
-	public boolean deleteSeminar(String id) {
-		boolean output = false;
-		try {
-			PreparedStatement ps = _connection.prepareStatement(
-					"DELETE FROM Course WHERE id = ?"
-					);
-			ps.setString(1, id);
-			output = ps.execute();
-			
-			ps.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		
-		return output;
+
+	@Override
+	protected void compileInsertQuery(Seminar s, PreparedStatement ps) throws SQLException {
+		ps.setString(1, s.getName());
+		ps.setString(2, s.getDescription());
+		ps.setString(3, s.getLocation());
+		ps.setInt(4, s.getSeatsLeft());
+		ps.setDate(5, Date.valueOf(s.getStartDate()));
 	}
+
+	@Override
+	protected String updateQuery() {
+		return "UPDATE Course SET name = ?, description = ?, location = ?,"
+				+ "totalSeats = ?, start = ? WHERE id = ?";
+	}
+
+	@Override
+	protected void compileUpdateQuery(Seminar s, PreparedStatement ps) throws SQLException {
+		compileInsertQuery(s, ps);
+		ps.setInt(6, Integer.valueOf(s.getId()));
+	}
+
+	@Override
+	protected String selectQuery() {
+		return "SELECT id, name, description, location, totalSeats, start FROM Course";
+	}
+
+	@Override
+	protected Seminar itemFromSelectResult(ResultSet rs) throws SQLException {
+		return new Seminar(
+				rs.getString(2),
+				String.valueOf(rs.getInt(1)),
+				rs.getString(3),
+				rs.getDate(6).toLocalDate(),
+				rs.getString(4),
+				rs.getInt(5)
+		);
+	}
+
+	@Override
+	protected String deleteQuery() {
+		return "DELETE FROM Course";
+	}
+
 }

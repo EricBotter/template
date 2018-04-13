@@ -19,7 +19,7 @@ public class CourseCreateController extends Controller {
 			CourseCreationParameters params = new CourseCreationParameters(context.request());
 			
 			if (params.isWholeInputValid()) {
-				new SeminarMapper(context.connection()).addSeminar(params.getSeminar());
+				new SeminarMapper(context.connection()).addItem(params.getSeminar());
 				context.response().sendRedirect("/course");
 			} else {
 				writeSimpleResponse(context, "text/html", new CourseCreateLayout().build(params).render());

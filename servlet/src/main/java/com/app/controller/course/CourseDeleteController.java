@@ -15,7 +15,7 @@ public class CourseDeleteController extends Controller {
 	public void execute(Context context) throws Exception {
 		String path = context.request().getServletPath();
 		String id = path.substring(path.lastIndexOf('/') + 1);
-		new SeminarMapper(context.connection()).deleteSeminar(id);
+		new SeminarMapper(context.connection()).deleteItemById(id);
 		context.response().sendRedirect("/course");
 	}
 

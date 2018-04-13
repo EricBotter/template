@@ -17,7 +17,7 @@ public class CourseListController extends Controller {
 	public void execute(Context context) throws Exception {
 		writeSimpleResponse(context, "text/html",
 				new CourseListLayout().buildAndRender(
-						new SeminarMapper(context.connection()).getSeminars()
+						new SeminarMapper(context.connection()).getAllItems()
 		));
 	}
 }

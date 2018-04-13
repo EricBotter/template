@@ -25,12 +25,12 @@ public class CourseViewController extends Controller {
 			params = new CourseCreationParameters(context.request());
 			
 			if (params.isWholeInputValid()) {
-				new SeminarMapper(context.connection()).updateSeminar(params.getSeminar());
+				new SeminarMapper(context.connection()).updateItem(params.getSeminar());
 				context.response().sendRedirect("/course");
 				return;
 			}
 		} else {
-			Seminar s = new SeminarMapper(context.connection()).getSeminar(id);
+			Seminar s = new SeminarMapper(context.connection()).getItemById(id);
 			params = new CourseCreationParameters(s);
 		}
 		
