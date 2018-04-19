@@ -1,4 +1,4 @@
-package com.app.controller.course.create;
+package com.app.controller.create;
 
 import java.util.List;
 
@@ -21,5 +21,5 @@ public abstract class InputParameter {
 	
 	public String getValue() {
 		return _value;
-	}	
+	}
 }

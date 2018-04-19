@@ -1,4 +1,4 @@
-package com.app.controller.course.create;
+package com.app.controller.create;
 
 public class InputError {
 	String _message;

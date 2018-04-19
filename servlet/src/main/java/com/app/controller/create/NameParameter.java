@@ -1,4 +1,4 @@
-package com.app.controller.course.create;
+package com.app.controller.create;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class NameParameter extends InputParameter {
 	
-	NameParameter(String value) {
+	public NameParameter(String value) {
 		super(value);
 	}
 	

@@ -1,13 +1,22 @@
-package com.app.controller.course.create;
+package com.app.controller.course;
 
 import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.app.controller.create.DescriptionParameter;
+import com.app.controller.create.IdParameter;
+import com.app.controller.create.InputParameter;
+import com.app.controller.create.InputParametersForItem;
+import com.app.controller.create.LocationParameter;
+import com.app.controller.create.NameParameter;
+import com.app.controller.create.StartDateParameter;
+import com.app.controller.create.TotalSeatsParameter;
+
 import seminar.Seminar;
 
-public class CourseCreationParameters {
+public class CourseCreationParameters implements InputParametersForItem<Seminar> {
 	public final NameParameter name;
 	public final DescriptionParameter description;
 	public final StartDateParameter date;
@@ -33,7 +42,8 @@ public class CourseCreationParameters {
 		id = new IdParameter(s.getId());
 	}
 
-	public Seminar getSeminar() {
+	@Override
+	public Seminar getItem() {
 		return new Seminar(name.getValue(),
 				id.getValue(),
 				description.getValue(),
@@ -43,10 +53,11 @@ public class CourseCreationParameters {
 		);
 	}
 
-	public List<InputParameter> getParameterList() {
+	private List<InputParameter> getParameterList() {
 		return Arrays.asList(id, name, description, location, date, seats);
 	}
 
+	@Override
 	public boolean isWholeInputValid() {
 		return getParameterList().stream()
 				.allMatch(param -> param.getValidationErrors().isEmpty());

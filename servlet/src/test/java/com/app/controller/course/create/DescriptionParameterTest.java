@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.app.controller.create.DescriptionParameter;
+
 public class DescriptionParameterTest {
 
 	@Test

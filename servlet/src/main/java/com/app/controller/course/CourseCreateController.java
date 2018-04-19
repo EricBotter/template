@@ -2,7 +2,6 @@ package com.app.controller.course;
 
 import com.app.controller.Context;
 import com.app.controller.Controller;
-import com.app.controller.course.create.CourseCreationParameters;
 import com.app.db.SeminarMapper;
 import com.app.view.CourseCreateLayout;
 
@@ -19,7 +18,7 @@ public class CourseCreateController extends Controller {
 			CourseCreationParameters params = new CourseCreationParameters(context.request());
 			
 			if (params.isWholeInputValid()) {
-				new SeminarMapper(context.connection()).addItem(params.getSeminar());
+				new SeminarMapper(context.connection()).addItem(params.getItem());
 				context.response().sendRedirect("/course");
 			} else {
 				writeSimpleResponse(context, "text/html", new CourseCreateLayout().build(params).render());

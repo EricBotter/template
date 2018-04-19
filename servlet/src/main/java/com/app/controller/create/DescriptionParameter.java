@@ -1,4 +1,4 @@
-package com.app.controller.course.create;
+package com.app.controller.create;
 
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class DescriptionParameter extends InputParameter {
 
-	DescriptionParameter(String value) {
+	public DescriptionParameter(String value) {
 		super(value);
 	}
 	

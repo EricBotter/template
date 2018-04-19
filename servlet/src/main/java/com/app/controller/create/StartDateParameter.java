@@ -1,4 +1,4 @@
-package com.app.controller.course.create;
+package com.app.controller.create;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class StartDateParameter extends InputParameter {
 	
-	StartDateParameter(String value) {
+	public StartDateParameter(String value) {
 		super(value);
 	}
 

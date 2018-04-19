@@ -1,4 +1,4 @@
-package com.app.controller.course.create;
+package com.app.controller.create;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class LocationParameter extends InputParameter {
 	
-	LocationParameter(String value) {
+	public LocationParameter(String value) {
 		super(value);
 	}
 
