@@ -5,14 +5,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.app.controller.create.DescriptionParameter;
-import com.app.controller.create.IdParameter;
-import com.app.controller.create.InputParameter;
-import com.app.controller.create.InputParametersForItem;
-import com.app.controller.create.LocationParameter;
-import com.app.controller.create.NameParameter;
-import com.app.controller.create.StartDateParameter;
-import com.app.controller.create.TotalSeatsParameter;
+import com.app.controller.parameters.DescriptionParameter;
+import com.app.controller.parameters.IdParameter;
+import com.app.controller.parameters.InputParameter;
+import com.app.controller.parameters.InputParametersForItem;
+import com.app.controller.parameters.LocationParameter;
+import com.app.controller.parameters.NameParameter;
+import com.app.controller.parameters.StartDateParameter;
+import com.app.controller.parameters.TotalSeatsParameter;
 
 import seminar.Seminar;
 

@@ -1,7 +1,7 @@
 package com.app.view;
 
 import com.app.controller.course.CourseCreationParameters;
-import com.app.controller.create.InputParametersForItem;
+import com.app.controller.parameters.InputParametersForItem;
 import com.github.manliogit.javatags.element.Element;
 
 import seminar.Seminar;
@@ -31,5 +31,10 @@ public class CourseCreateLayout extends FormLayout<Seminar> {
 			inputFieldWithData(params.location, "text", "Location", "Room 3, main building"),
 			inputFieldWithData(params.seats, "number", "Tot. seats", "50")
 		);
+	}
+
+	@Override
+	public String getEntity() {
+		return "Course";
 	}
 }

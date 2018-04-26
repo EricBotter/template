@@ -52,6 +52,8 @@ public abstract class ListLayout<T> {
 				"      <div class=\"list-group table-of-contents\">\n" + 
 				"       <a class=\"list-group-item\" href=\"/course\">Course list</a>\n" + 
 				"       <a class=\"list-group-item\" href=\"/course/create\">Course create</a>\n" + 
+				"       <a class=\"list-group-item\" href=\"/student\">Student list</a>\n" + 
+				"       <a class=\"list-group-item\" href=\"/student/create\">Student create</a>\n" + 
 				"      </div>\n" + 
 				"     </div>\n" + 
 				"     <div class=\"col-lg-8 col-md-8 col-sm-9\">\n" + 
@@ -78,7 +80,7 @@ public abstract class ListLayout<T> {
 				"</html>\n";
 
 	public String buildAndRender(List<T> items) {
-		return _htmlHeader + tableBody(items) + _htmlFooter;
+		return _htmlHeader + tableHeader() + tableBody(items) + _htmlFooter;
 	}
 
 	protected abstract String tableHeader();

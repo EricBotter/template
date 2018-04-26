@@ -5,28 +5,28 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.app.controller.create.IdParameter;
-import com.app.controller.create.InputParameter;
-import com.app.controller.create.InputParametersForItem;
-import com.app.controller.create.NameParameter;
-import com.app.controller.create.SurnameParameter;
+import com.app.controller.parameters.IdParameter;
+import com.app.controller.parameters.InputParameter;
+import com.app.controller.parameters.InputParametersForItem;
+import com.app.controller.parameters.NameParameter;
+import com.app.controller.parameters.SurnameParameter;
 
 import seminar.Student;
 
-public class StudentParameters implements InputParametersForItem<Student> {
+public class StudentCreationParameters implements InputParametersForItem<Student> {
 	public final NameParameter name;
 	public final SurnameParameter surname;
 	public final IdParameter id;
 	
-	public StudentParameters(HttpServletRequest request) {
+	public StudentCreationParameters(HttpServletRequest request) {
 		name = new NameParameter(request);
 		surname = new SurnameParameter(request);
 		id = new IdParameter(request);
 	}
 
-	public StudentParameters(Student s) {
+	public StudentCreationParameters(Student s) {
 		name = new NameParameter(s.getName());
-		surname = new SurnameParameter(s.getName());
+		surname = new SurnameParameter(s.getSurname());
 		id = new IdParameter(String.valueOf(s.getId()));
 	}
 

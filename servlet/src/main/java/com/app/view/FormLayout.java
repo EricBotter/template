@@ -5,10 +5,10 @@ import static com.github.manliogit.javatags.lang.HtmlHelper.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.app.controller.create.IdParameter;
-import com.app.controller.create.InputError;
-import com.app.controller.create.InputParameter;
-import com.app.controller.create.InputParametersForItem;
+import com.app.controller.parameters.IdParameter;
+import com.app.controller.parameters.InputError;
+import com.app.controller.parameters.InputParameter;
+import com.app.controller.parameters.InputParametersForItem;
 import com.github.manliogit.javatags.element.Element;
 
 public abstract class FormLayout<T> {
@@ -71,7 +71,7 @@ public abstract class FormLayout<T> {
 				div(attr("class -> container"),
 					div(attr("class -> row"),
 						div(attr("class -> col-md-6 col-md-offset-3"),
-							h1(attr("class -> page-header text-center"), "Create Course"),
+							h1(attr("class -> page-header text-center"), "Create " + getEntity()),
 							form(attr("class -> form-horizontal", "method -> POST"),
 								elements
 							)
@@ -83,6 +83,8 @@ public abstract class FormLayout<T> {
 			)
 		);
 	}
+
+	public abstract String getEntity();
 
 	public abstract Element build(InputParametersForItem<T> params);
 

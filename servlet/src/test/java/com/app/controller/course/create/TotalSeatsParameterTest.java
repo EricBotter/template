@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.app.controller.create.TotalSeatsParameter;
+import com.app.controller.parameters.TotalSeatsParameter;
 
 public class TotalSeatsParameterTest {
 

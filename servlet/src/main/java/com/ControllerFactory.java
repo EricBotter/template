@@ -6,19 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.controller.Controller;
-import com.app.controller.course.CourseCreateController;
-import com.app.controller.course.CourseDeleteController;
-import com.app.controller.course.CourseListController;
-import com.app.controller.course.CourseViewController;
+import com.app.controller.CreateController;
+import com.app.controller.DeleteController;
+import com.app.controller.HomeController;
+import com.app.controller.ListController;
+import com.app.controller.ViewController;
 
 public class ControllerFactory {
 
 	public List<Controller> create() {
 		return new ArrayList<>(asList(
-				new CourseCreateController(),
-				new CourseListController(),
-				new CourseViewController(),
-				new CourseDeleteController()
+				new HomeController(),
+				new CreateController(),
+				new ListController(),
+				new ViewController(),
+				new DeleteController()
 			));
 	}
 }

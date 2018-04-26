@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.app.controller.create.LocationParameter;
+import com.app.controller.parameters.LocationParameter;
 
 public class LocationParameterTest {
 

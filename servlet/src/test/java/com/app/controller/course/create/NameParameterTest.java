@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.app.controller.create.NameParameter;
+import com.app.controller.parameters.NameParameter;
 
 public class NameParameterTest {
 

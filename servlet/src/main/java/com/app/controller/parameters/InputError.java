@@ -1,4 +1,4 @@
-package com.app.controller.create;
+package com.app.controller.parameters;
 
 public class InputError {
 	String _message;

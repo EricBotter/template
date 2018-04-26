@@ -7,7 +7,7 @@ import java.time.Month;
 
 import org.junit.Test;
 
-import com.app.controller.create.StartDateParameter;
+import com.app.controller.parameters.StartDateParameter;
 
 public class StartDateParameterTest {
 
