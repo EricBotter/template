@@ -4,14 +4,14 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.app.controller.course.CourseListController;
+import com.app.controller.course.SeminarEntity;
 
 public class CourseListControllerTest {
 
 	@Test
 	public void test() {
-		assertTrue(new CourseListController().handles("/course/"));
-		assertTrue(new CourseListController().handles("/course"));
+		assertTrue(new ListController<>(new SeminarEntity()).handles("/course/"));
+		assertTrue(new ListController<>(new SeminarEntity()).handles("/course"));
 	}
 
 }
