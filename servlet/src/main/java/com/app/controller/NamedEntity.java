@@ -1,6 +1,6 @@
 package com.app.controller;
 
-public interface NamedEntity<T> {
+public interface NamedEntity {
 
 	String getName();
 

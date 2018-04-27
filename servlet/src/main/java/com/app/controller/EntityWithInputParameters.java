@@ -2,7 +2,7 @@ package com.app.controller;
 
 import com.app.controller.parameters.InputParametersForItem;
 
-public interface EntityWithParameters<T> {
+public interface EntityWithInputParameters<T> {
 
 	InputParametersForItem<T> getParameters(Context context);
 
