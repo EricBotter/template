@@ -2,6 +2,7 @@ package com.app.controller.student;
 
 import com.app.controller.Context;
 import com.app.controller.Controller;
+import com.app.controller.ControllerHelper;
 import com.app.db.StudentMapper;
 import com.app.view.StudentCreateLayout;
 
@@ -9,7 +10,7 @@ public class StudentCreateController extends Controller {
 	
 	@Override
 	public boolean handles(String route) {
-		return routeCheckWithSlashTolerance(route, "/student/create");
+		return ControllerHelper.routeCheckWithSlashTolerance(route, "/student/create");
 	}
 
 	@Override
@@ -20,9 +21,11 @@ public class StudentCreateController extends Controller {
 				new StudentMapper(context.connection()).addItem(params.getItem());
 				context.response().sendRedirect("/student");
 			} else {
-				writeSimpleResponse(context, "text/html", new StudentCreateLayout().build(params).render());
+				ControllerHelper.writeSimpleResponse(
+						context, "text/html", new StudentCreateLayout().build(params).render());
 			}
 		} else
-			writeSimpleResponse(context, "text/html", new StudentCreateLayout().buildEmpty().render());
+			ControllerHelper.writeSimpleResponse(
+					context, "text/html", new StudentCreateLayout().buildEmpty().render());
 	}
 }

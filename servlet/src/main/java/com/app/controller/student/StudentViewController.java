@@ -2,6 +2,7 @@ package com.app.controller.student;
 
 import com.app.controller.Context;
 import com.app.controller.Controller;
+import com.app.controller.ControllerHelper;
 import com.app.db.StudentMapper;
 import com.app.view.StudentCreateLayout;
 
@@ -33,6 +34,7 @@ public class StudentViewController extends Controller {
 			params = new StudentInputParameters(s);
 		}
 		
-		writeSimpleResponse(context, "text/html", new StudentCreateLayout().build(params).render());
+		ControllerHelper.writeSimpleResponse(
+				context, "text/html", new StudentCreateLayout().build(params).render());
 	}
 }

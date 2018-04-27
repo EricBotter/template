@@ -2,6 +2,7 @@ package com.app.controller.course;
 
 import com.app.controller.Context;
 import com.app.controller.Controller;
+import com.app.controller.ControllerHelper;
 import com.app.db.SeminarMapper;
 import com.app.view.CourseCreateLayout;
 
@@ -33,6 +34,7 @@ public class CourseViewController extends Controller {
 			params = new CourseInputParameters(s);
 		}
 		
-		writeSimpleResponse(context, "text/html", new CourseCreateLayout().build(params).render());
+		ControllerHelper.writeSimpleResponse(
+				context, "text/html", new CourseCreateLayout().build(params).render());
 	}
 }

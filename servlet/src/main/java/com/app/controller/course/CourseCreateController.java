@@ -2,6 +2,7 @@ package com.app.controller.course;
 
 import com.app.controller.Context;
 import com.app.controller.Controller;
+import com.app.controller.ControllerHelper;
 import com.app.db.SeminarMapper;
 import com.app.view.CourseCreateLayout;
 
@@ -9,7 +10,7 @@ public class CourseCreateController extends Controller {
 	
 	@Override
 	public boolean handles(String route) {
-		return routeCheckWithSlashTolerance(route, "/course/create");
+		return ControllerHelper.routeCheckWithSlashTolerance(route, "/course/create");
 	}
 
 	@Override
@@ -20,9 +21,11 @@ public class CourseCreateController extends Controller {
 				new SeminarMapper(context.connection()).addItem(params.getItem());
 				context.response().sendRedirect("/course");
 			} else {
-				writeSimpleResponse(context, "text/html", new CourseCreateLayout().build(params).render());
+				ControllerHelper.writeSimpleResponse(
+						context, "text/html", new CourseCreateLayout().build(params).render());
 			}
 		} else
-			writeSimpleResponse(context, "text/html", new CourseCreateLayout().buildEmpty().render());
+			ControllerHelper.writeSimpleResponse(
+					context, "text/html", new CourseCreateLayout().buildEmpty().render());
 	}
 }
