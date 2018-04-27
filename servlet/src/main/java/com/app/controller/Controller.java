@@ -5,6 +5,7 @@ public abstract class Controller {
 	public abstract boolean handles(String route);
 	public abstract void execute(Context context) throws Exception;
 	
+	// TODO - move these in a "static" helper class
 	protected void writeSimpleResponse(Context context, String contentType, String output) throws Exception {
 		context.response().setContentType(contentType);
 		context.response().setCharacterEncoding("UTF-8");
