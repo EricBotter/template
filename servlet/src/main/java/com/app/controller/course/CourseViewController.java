@@ -18,10 +18,10 @@ public class CourseViewController extends Controller {
 	public void execute(Context context) throws Exception {
 		String path = context.request().getServletPath();
 		String id = path.substring(path.lastIndexOf('/') + 1);
-		CourseCreationParameters params;
+		CourseInputParameters params;
 
 		if (context.request().getMethod().equals("POST")) {
-			params = new CourseCreationParameters(context.request());
+			params = new CourseInputParameters(context.request());
 			
 			if (params.isWholeInputValid()) {
 				new SeminarMapper(context.connection()).updateItem(params.getItem());
@@ -30,7 +30,7 @@ public class CourseViewController extends Controller {
 			}
 		} else {
 			Seminar s = new SeminarMapper(context.connection()).getItemById(id);
-			params = new CourseCreationParameters(s);
+			params = new CourseInputParameters(s);
 		}
 		
 		writeSimpleResponse(context, "text/html", new CourseCreateLayout().build(params).render());

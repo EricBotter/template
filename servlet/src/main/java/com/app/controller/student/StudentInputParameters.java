@@ -13,18 +13,18 @@ import com.app.controller.parameters.SurnameParameter;
 
 import seminar.Student;
 
-public class StudentCreationParameters implements InputParametersForItem<Student> {
+public class StudentInputParameters implements InputParametersForItem<Student> {
 	public final NameParameter name;
 	public final SurnameParameter surname;
 	public final IdParameter id;
 	
-	public StudentCreationParameters(HttpServletRequest request) {
+	public StudentInputParameters(HttpServletRequest request) {
 		name = new NameParameter(request);
 		surname = new SurnameParameter(request);
 		id = new IdParameter(request);
 	}
 
-	public StudentCreationParameters(Student s) {
+	public StudentInputParameters(Student s) {
 		name = new NameParameter(s.getName());
 		surname = new SurnameParameter(s.getSurname());
 		id = new IdParameter(String.valueOf(s.getId()));

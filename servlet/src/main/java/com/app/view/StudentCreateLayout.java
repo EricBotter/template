@@ -1,7 +1,7 @@
 package com.app.view;
 
 import com.app.controller.parameters.InputParametersForItem;
-import com.app.controller.student.StudentCreationParameters;
+import com.app.controller.student.StudentInputParameters;
 import com.github.manliogit.javatags.element.Element;
 
 import seminar.Student;
@@ -19,7 +19,7 @@ public class StudentCreateLayout extends FormLayout<Student> {
 
 	@Override
 	public Element build(InputParametersForItem<Student> items) {
-		StudentCreationParameters params = (StudentCreationParameters)items;
+		StudentInputParameters params = (StudentInputParameters)items;
 		return compileForm(
 				hiddenIdInput(params.id),
 				inputFieldWithData(params.name, "text", "Name", "Student Name"),

@@ -16,7 +16,7 @@ import com.app.controller.parameters.TotalSeatsParameter;
 
 import seminar.Seminar;
 
-public class CourseCreationParameters implements InputParametersForItem<Seminar> {
+public class CourseInputParameters implements InputParametersForItem<Seminar> {
 	public final NameParameter name;
 	public final DescriptionParameter description;
 	public final StartDateParameter date;
@@ -24,7 +24,7 @@ public class CourseCreationParameters implements InputParametersForItem<Seminar>
 	public final TotalSeatsParameter seats;
 	public final IdParameter id;
 	
-	public CourseCreationParameters(HttpServletRequest request) {
+	public CourseInputParameters(HttpServletRequest request) {
 		name = new NameParameter(request);
 		description = new DescriptionParameter(request);
 		location = new LocationParameter(request);
@@ -33,7 +33,7 @@ public class CourseCreationParameters implements InputParametersForItem<Seminar>
 		id = new IdParameter(request);
 	}
 
-	public CourseCreationParameters(Seminar s) {
+	public CourseInputParameters(Seminar s) {
 		name = new NameParameter(s.getName());
 		description = new DescriptionParameter(s.getDescription());
 		location = new LocationParameter(s.getLocation());

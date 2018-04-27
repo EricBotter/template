@@ -18,10 +18,10 @@ public class StudentViewController extends Controller {
 	public void execute(Context context) throws Exception {
 		String path = context.request().getServletPath();
 		String id = path.substring(path.lastIndexOf('/') + 1);
-		StudentCreationParameters params;
+		StudentInputParameters params;
 
 		if (context.request().getMethod().equals("POST")) {
-			params = new StudentCreationParameters(context.request());
+			params = new StudentInputParameters(context.request());
 			
 			if (params.isWholeInputValid()) {
 				new StudentMapper(context.connection()).updateItem(params.getItem());
@@ -30,7 +30,7 @@ public class StudentViewController extends Controller {
 			}
 		} else {
 			Student s = new StudentMapper(context.connection()).getItemById(id);
-			params = new StudentCreationParameters(s);
+			params = new StudentInputParameters(s);
 		}
 		
 		writeSimpleResponse(context, "text/html", new StudentCreateLayout().build(params).render());

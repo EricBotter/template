@@ -1,6 +1,6 @@
 package com.app.view;
 
-import com.app.controller.course.CourseCreationParameters;
+import com.app.controller.course.CourseInputParameters;
 import com.app.controller.parameters.InputParametersForItem;
 import com.github.manliogit.javatags.element.Element;
 
@@ -22,7 +22,7 @@ public class CourseCreateLayout extends FormLayout<Seminar> {
 
 	@Override
 	public Element build(InputParametersForItem<Seminar> items) {
-		CourseCreationParameters params = (CourseCreationParameters)items;
+		CourseInputParameters params = (CourseInputParameters)items;
 		return compileForm(
 			hiddenIdInput(params.id),
 			inputFieldWithData(params.name, "text", "Name", "Introductory Seminar"),

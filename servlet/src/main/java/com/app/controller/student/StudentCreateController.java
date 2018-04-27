@@ -14,7 +14,7 @@ public class StudentCreateController extends Controller {
 
 	@Override
 	public void execute(Context context) throws Exception {
-		StudentCreationParameters params = new StudentCreationParameters(context.request());
+		StudentInputParameters params = new StudentInputParameters(context.request());
 		if (context.request().getMethod().equals("POST")) {
 			if (params.isWholeInputValid()) {
 				new StudentMapper(context.connection()).addItem(params.getItem());
